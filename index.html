@@ -136,9 +136,6 @@ main{padding:0 46px 140px 46px;min-width:0}
 .card::before{
   content:"";position:absolute;left:0;top:15px;bottom:15px;width:2.5px;border-radius:3px;background:var(--rule);
 }
-.card[data-tag="must"]::before{background:var(--must)}
-.card[data-tag="use"]::before{background:var(--use)}
-.card[data-tag="know"]::before{background:var(--know)}
 .card--wide{grid-column:span 2}
 .card__h{display:flex;align-items:baseline;gap:9px;margin-bottom:12px}
 .card__no{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.06em;padding-top:1px}
@@ -164,6 +161,7 @@ main{padding:0 46px 140px 46px;min-width:0}
   margin:12px 0 0;padding-top:10px;border-top:1px dashed var(--rule);
   font-size:12.5px;color:var(--ink-3);line-height:1.72;
 }
+.card h4{margin:20px 0 10px;font-size:12.5px;font-weight:600;letter-spacing:.1em;color:var(--ink)}
 .hint b{color:var(--ink-2);font-weight:600}
 .hint .m{font-size:1em}
 .note-inline{font-size:12.5px;color:var(--ink-3)}
@@ -267,15 +265,7 @@ body.noresult .empty{display:block}
       <small>极限 · 导数与微分 · 泰勒展开 · 不定积分 · 三角公式全表</small>
     </h1>
     <div class="hero__meta">
-      <span>共 <b id="nTotal">—</b> 条</span>
-      <span>必背 <b id="nMust" style="color:var(--must)">—</b> 条</span>
-      <span>会用 <b id="nUse">—</b> 条</span>
-      <span>了解 <b id="nKnow">—</b> 条</span>
-    </div>
-    <div class="legend">
-      <span class="l-must"><i></i>必背：闭卷要能默写</span>
-      <span class="l-use"><i></i>会用：可现推或查表</span>
-      <span class="l-know"><i></i>了解：知道存在即可</span>
+      <span>共 <b id="nTotal">—</b> 张卡片</span>
     </div>
   </header>
 
@@ -285,10 +275,6 @@ body.noresult .empty{display:block}
       <input id="q" type="search" placeholder="搜「降幂」「sec」「泰勒」…" autocomplete="off">
       <kbd>/</kbd>
     </label>
-    <button class="chip" data-filter="all" aria-pressed="true">全部 <b data-c="all">0</b></button>
-    <button class="chip" data-filter="must" aria-pressed="false">必背 <b data-c="must">0</b></button>
-    <button class="chip" data-filter="use" aria-pressed="false">会用 <b data-c="use">0</b></button>
-    <button class="chip" data-filter="know" aria-pressed="false">了解 <b data-c="know">0</b></button>
     <span class="bar__sp"></span>
     <button class="chip chip--test" id="testBtn" aria-pressed="false">自测模式</button>
     <button class="icon-btn" id="printBtn">打印 / PDF</button>
@@ -307,8 +293,8 @@ body.noresult .empty{display:block}
     </div>
     <div class="grid">
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">1.1</span><h3>夹逼准则</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">1.1</span><h3>夹逼准则</h3></div>
         <div class="rows">
           <div class="row"><span class="m">g(x)\le f(x)\le h(x)</span></div>
           <div class="row"><span class="m">\lim g(x)=\lim h(x)=A\ \Longrightarrow\ \lim f(x)=A</span></div>
@@ -317,41 +303,41 @@ body.noresult .empty{display:block}
         </div>
         <div class="eq"><span class="m">\frac{1-\cos x}{x^{2}}=\frac{1-\cos^{2}x}{x^{2}(1+\cos x)}=\left(\frac{\sin x}{x}\right)^{2}\cdot\frac{1}{1+\cos x}</span></div>
         <div class="eq"><span class="m">\longrightarrow\ 1^{2}\cdot\frac{1}{2}=\frac{1}{2}\qquad (x\to 0)</span></div>
-        <p class="hint">笔记里的示范：这正是 <span class="m">\lim_{x\to 0}\frac{\sin x}{x}=1</span> 的标准证法。<b>主动构造</b>两端是关键；n 项和型极限先看分母能否同时放大、缩小成同一形式，能则一步夹死。</p>
+        <p class="hint">这正是 <span class="m">\lim_{x\to 0}\frac{\sin x}{x}=1</span> 的标准证法。<b>主动构造</b>两端是关键；n 项和型极限先看分母能否同时放大、缩小成同一形式，能则一步夹死。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">1.2</span><h3>单调有界准则</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">1.2</span><h3>单调有界准则</h3></div>
         <div class="eq"><span class="m">\text{单调递增且有上界}\ \Rightarrow\ \text{必有极限}</span></div>
         <div class="eq"><span class="m">\text{单调递减且有下界}\ \Rightarrow\ \text{必有极限}</span></div>
         <p class="hint">递推数列 <span class="m">a_{n+1}=f(a_n)</span> 的标准两步：① 归纳法证单调 + 有界；② 设极限为 <span class="m">A</span>，解方程 <span class="m">A=f(A)</span>。<b>先有界才能设极限</b>，顺序不能反。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">1.3</span><h3>两个重要极限</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">1.3</span><h3>两个重要极限</h3></div>
         <div class="eq"><span class="m">\lim_{x\to 0}\frac{\sin x}{x}=1</span></div>
         <div class="eq"><span class="m">\lim_{x\to\infty}\left(1+\frac{1}{x}\right)^{x}=e</span></div>
         <div class="eq"><span class="m">\lim_{x\to 0}(1+x)^{\frac{1}{x}}=e</span></div>
-        <p class="hint">推广形式：<span class="m">\lim_{u\to 0}\frac{\sin u}{u}=1</span>、<span class="m">\lim_{u\to\infty}(1+\frac{1}{u})^{u}=e</span>，<span class="m">u</span> 可以是任意表达式。第一式要求<b>弧度制</b>。<b>笔记第二条的指数记成了 n，应为 x</b>，此处已改。</p>
+        <p class="hint">推广形式：<span class="m">\lim_{u\to 0}\frac{\sin u}{u}=1</span>、<span class="m">\lim_{u\to\infty}(1+\frac{1}{u})^{u}=e</span>，<span class="m">u</span> 可以是任意表达式。第一式要求<b>弧度制</b>。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">1.4</span><h3>1<sup>∞</sup> 型极限</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">1.4</span><h3>1<sup>∞</sup> 型极限</h3></div>
         <div class="eq"><span class="m">\lim u^{v}=e^{\lim v(u-1)}\qquad (u\to 1,\ v\to\infty)</span></div>
         <p class="hint">来源：<span class="m">u^{v}=e^{v\ln u}</span>，再用 <span class="m">\ln u\sim u-1</span>。三步走：底写成 <span class="m">1+\alpha</span> → 算 <span class="m">v\alpha</span> → 取 <span class="m">e</span> 的幂。</p>
       </article>
 
-      <article class="card" data-tag="use">
-        <div class="card__h"><span class="card__no">1.5</span><h3>常用补充极限</h3><span class="tag tag--use">会用</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">1.5</span><h3>常用补充极限</h3></div>
         <div class="rows">
-          <div class="row"><span class="m">\lim_{x\to 0}\frac{k^{x}-1}{x}=\ln k</span><span class="row__note">笔记 ②</span></div>
-          <div class="row"><span class="m">u\to 1\ \text{时}\ \ln u\sim u-1</span><span class="row__note">笔记 ③</span></div>
+          <div class="row"><span class="m">\lim_{x\to 0}\frac{k^{x}-1}{x}=\ln k</span><span class="row__note">k 为任意正底数</span></div>
+          <div class="row"><span class="m">u\to 1\ \text{时}\ \ln u\sim u-1</span><span class="row__note">用于 1<sup>∞</sup> 型</span></div>
         </div>
-        <p class="hint">笔记把这两条单独拎出来，是因为 <span class="m">\ln u\sim u-1</span> 正是 <span class="m">1^{\infty}</span> 型那个 <span class="m">e^{\lim v(u-1)}</span> 的来源；<span class="m">k</span> 泛指底数，教材多写 <span class="m">a</span>。其余 <span class="m">e^{x}-1</span>、<span class="m">\arcsin x</span>、<span class="m">\arctan x</span> 几条不必单列，由 1.7 直接读出。<b>原笔记「n→1」是笔误，应为 u→1。</b></p>
+        <p class="hint">这两条撑起 <span class="m">1^{\infty}</span> 型：<span class="m">\ln u\sim u-1</span> 正是 <span class="m">e^{\lim v(u-1)}</span> 的来源。<span class="m">k</span> 为任意正底数，教材多写 <span class="m">a</span>。其余 <span class="m">e^{x}-1</span>、<span class="m">\arcsin x</span>、<span class="m">\arctan x</span> 由 1.7 直接读出，不必单列。</p>
       </article>
 
-      <article class="card card--wide" data-tag="must">
-        <div class="card__h"><span class="card__no">1.6</span><h3>无穷小的阶</h3><span class="tag tag--must">必背</span></div>
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">1.6</span><h3>无穷小的阶</h3></div>
         <table class="tbl">
           <thead><tr><th>lim α/β</th><th>说法</th><th>记号</th><th>例（x→0）</th></tr></thead>
           <tbody>
@@ -364,8 +350,8 @@ body.noresult .empty{display:block}
         <p class="hint">判据一律写成 <span class="m">\alpha/\beta</span> 型，结论说的都是<b>α 相对 β</b>。最后一行最易记反：是 α 是 β 的 k 阶，不是反过来。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">1.7</span><h3>等价无穷小 · 一阶</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">1.7</span><h3>等价无穷小 · 一阶</h3></div>
         <div class="rows">
           <div class="row"><span class="m">\sin x\sim x</span><span class="m">\tan x\sim x</span></div>
           <div class="row"><span class="m">\arcsin x\sim x</span><span class="m">\arctan x\sim x</span></div>
@@ -377,8 +363,8 @@ body.noresult .empty{display:block}
         <p class="hint"><b>前提都是 <span class="m">x\to 0</span></b>。写成 <span class="m">\sin x\sim x</span> 在任何 <span class="m">x</span> 下都成立是常见错误。</p>
       </article>
 
-      <article class="card" data-tag="use">
-        <div class="card__h"><span class="card__no">1.8</span><h3>等价无穷小 · 二阶</h3><span class="tag tag--use">会用</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">1.8</span><h3>等价无穷小 · 二阶</h3></div>
         <div class="rows">
           <div class="row"><span class="m">1-\cos x\sim \frac{x^{2}}{2}</span></div>
           <div class="row"><span class="m">\sec x-1\sim \frac{x^{2}}{2}</span></div>
@@ -387,8 +373,8 @@ body.noresult .empty{display:block}
         <p class="hint">三条都是「一阶项刚好抵消」的产物，只有出现相减时才用得上。</p>
       </article>
 
-      <article class="card" data-tag="use">
-        <div class="card__h"><span class="card__no">1.9</span><h3>等价无穷小 · 三阶</h3><span class="tag tag--use">会用</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">1.9</span><h3>等价无穷小 · 三阶</h3></div>
         <div class="rows">
           <div class="row"><span class="m">\tan x-\sin x\sim \frac{x^{3}}{2}</span></div>
           <div class="row"><span class="m">\tan x-x\sim \frac{x^{3}}{3}</span><span class="row__note">x−tanx ~ −x³/3</span></div>
@@ -399,8 +385,8 @@ body.noresult .empty{display:block}
         <p class="hint">符号记法：<b>函数减 <span class="m">x</span> 为正系数，<span class="m">x</span> 减函数为负</b>。系数排列 1/6、1/3、1/2 正好对应 <span class="m">\sin</span>、<span class="m">\tan</span>、两者之差。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">1.10</span><h3>替换的边界</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">1.10</span><h3>替换的边界</h3></div>
         <div class="eq"><span class="m">\lim_{x\to 0}\frac{\tan x-\sin x}{x^{3}}</span></div>
         <div class="rows">
           <div class="row"><span class="m">\times\ \tan x\sim x,\ \sin x\sim x\ \Rightarrow\ 0</span><span class="row__note">错</span></div>
@@ -424,29 +410,29 @@ body.noresult .empty{display:block}
     </div>
     <div class="grid">
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">2.1</span><h3>导数定义</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">2.1</span><h3>导数定义</h3></div>
         <div class="eq"><span class="m">f'(x_0)=\lim_{\Delta x\to 0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}</span></div>
         <div class="eq"><span class="m">f'(x_0)=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}</span></div>
         <div class="eq"><span class="m">\lim_{h\to 0}\frac{f(x_0+2h)-f(x_0)}{h}=2f'(x_0)</span></div>
         <p class="hint">用定义求极限时，把式子<b>凑成 Δy/Δx 的形状</b>，缺的常数因子在外面补回——上式分母是 <span class="m">h</span> 而增量是 <span class="m">2h</span>，所以补一个 2。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">2.2</span><h3>可导 ↔ 连续</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">2.2</span><h3>可导 ↔ 连续</h3></div>
         <div class="eq"><span class="m">\text{可导}\ \Longrightarrow\ \text{连续},\qquad \text{连续}\ \nRightarrow\ \text{可导}</span></div>
         <div class="eq"><span class="m">\text{左（右）导数存在}\ \Longrightarrow\ \text{左（右）连续}</span></div>
         <p class="hint">反例：<span class="m">y=|x|</span> 在 <span class="m">x=0</span> 连续但左右导数不等；<span class="m">y=\sqrt[3]{x}</span> 在该点导数无穷。<b>连续是可导的必要不充分条件</b>。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">2.3</span><h3>可导的充要条件</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">2.3</span><h3>可导的充要条件</h3></div>
         <div class="eq"><span class="m">f'(x_0)\ \text{存在}\ \Longleftrightarrow\ f'_+(x_0)=f'_-(x_0)</span></div>
         <p class="hint">分段函数在分界点的固定套路：分别算左右导数，<b>相等才可导</b>，且此时导数值就是这个公共值。只算一边是典型失分点。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">2.4</span><h3>四则求导法则</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">2.4</span><h3>四则求导法则</h3></div>
         <div class="rows">
           <div class="row"><span class="m">(u\pm v)'=u'\pm v'</span></div>
           <div class="row"><span class="m">(uv)'=u'v+uv'</span></div>
@@ -456,21 +442,21 @@ body.noresult .empty{display:block}
         <p class="hint">商的公式分子顺序不可反：<b>上导下不导 减 上不导下导</b>，分母平方。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">2.5</span><h3>复合函数链式法则</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">2.5</span><h3>复合函数链式法则</h3></div>
         <div class="eq"><span class="m">y=f(u),\ u=\varphi(x)\ \Longrightarrow\ y'=f'(u)\cdot\varphi'(x)</span></div>
         <div class="eq"><span class="m">y=f(\varphi(\psi(x)))\ \Longrightarrow\ y'=f'(\varphi)\cdot\varphi'(\psi)\cdot\psi'(x)</span></div>
         <p class="hint">由外向内<b>逐层剥</b>，每剥一层乘一个导数，最后一层是自变量本身。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">2.6</span><h3>反函数求导</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">2.6</span><h3>反函数求导</h3></div>
         <div class="eq"><span class="m">\frac{\mathrm{d}y}{\mathrm{d}x}=\frac{1}{\ \frac{\mathrm{d}x}{\mathrm{d}y}\ }</span></div>
         <p class="hint">反三角函数那一整列公式就是这么推出来的。写 <span class="m">x=\sin y</span> → <span class="m">\frac{\mathrm{d}x}{\mathrm{d}y}=\cos y</span> → 再用 <span class="m">\cos y=\sqrt{1-x^{2}}</span> 回代。</p>
       </article>
 
-      <article class="card card--wide" data-tag="must">
-        <div class="card__h"><span class="card__no">2.7</span><h3>基本导数表</h3><span class="tag tag--must">必背</span></div>
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">2.7</span><h3>基本导数表</h3></div>
         <table class="tbl tbl--2col">
           <tbody>
             <tr><td><span class="m">(C)'=0</span></td><td><span class="m">(x^{\mu})'=\mu x^{\mu-1}</span></td></tr>
@@ -486,8 +472,8 @@ body.noresult .empty{display:block}
         <p class="hint">十六个公式按<b>幂→三角→反三角→指数对数</b>四组记。带负号的只有 <span class="m">\cos,\cot,\csc</span> 和 <span class="m">\arccos,\operatorname{arccot}</span> 五个，其余全正。</p>
       </article>
 
-      <article class="card" data-tag="use">
-        <div class="card__h"><span class="card__no">2.8</span><h3>高阶导数常用式</h3><span class="tag tag--use">会用</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">2.8</span><h3>高阶导数常用式</h3></div>
         <div class="rows">
           <div class="row"><span class="m">(\sin kx)^{(n)}=k^{n}\sin\!\left(kx+n\frac{\pi}{2}\right)</span></div>
           <div class="row"><span class="m">(\cos kx)^{(n)}=k^{n}\cos\!\left(kx+n\frac{\pi}{2}\right)</span></div>
@@ -502,8 +488,8 @@ body.noresult .empty{display:block}
         <p class="hint">三角类每求一次导，相位前进 <span class="m">\frac{\pi}{2}</span>、系数乘一个 <span class="m">k</span>，所以是 <span class="m">k^{n}</span> 而不是 <span class="m">k</span>。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">2.9</span><h3>莱布尼茨公式</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">2.9</span><h3>莱布尼茨公式</h3></div>
         <div class="eq"><span class="m">(uv)^{(n)}=\sum_{k=0}^{n}C_n^{k}\,u^{(n-k)}v^{(k)}</span></div>
         <div class="eq"><span class="m">(uv)''=u''v+2u'v'+uv''</span></div>
         <div class="eq"><span class="m">(uv)'''=u'''v+3u''v'+3u'v''+uv'''</span></div>
@@ -524,34 +510,34 @@ body.noresult .empty{display:block}
     </div>
     <div class="grid">
 
-      <article class="card card--wide" data-tag="must">
-        <div class="card__h"><span class="card__no">3.1</span><h3>n 阶泰勒多项式</h3><span class="tag tag--must">必背</span></div>
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">3.1</span><h3>n 阶泰勒多项式</h3></div>
         <div class="eq"><span class="m">P_n(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^{2}+\cdots+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^{n}</span></div>
         <p class="hint">要求到 <span class="m">n</span> 阶导，<b>每一项都除以对应的阶乘</b>，<span class="m">x_0</span> 处取的是各阶导数值而不是导函数。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">3.2</span><h3>拉格朗日余项</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">3.2</span><h3>拉格朗日余项</h3></div>
         <div class="eq"><span class="m">R_n(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}</span></div>
         <div class="eq"><span class="m">\xi=x_0+\theta(x-x_0),\quad 0&lt;\theta&lt;1</span></div>
         <p class="hint"><b>给的是精确表达式</b>，用于证明不等式、估计误差。要写成它，<span class="m">f</span> 必须 <span class="m">n+1</span> 阶可导。</p>
       </article>
 
-      <article class="card" data-tag="use">
-        <div class="card__h"><span class="card__no">3.3</span><h3>佩亚诺余项</h3><span class="tag tag--use">会用</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">3.3</span><h3>佩亚诺余项</h3></div>
         <div class="eq"><span class="m">R_n(x)=o\!\left((x-x_0)^{n}\right)</span></div>
         <p class="hint">只给<b>阶的估计</b>、不给具体值。<b>求极限用它最快</b>，因为不必知道余项长什么样，只要 <span class="m">f</span> 在 <span class="m">x_0</span> 处 <span class="m">n</span> 阶可导。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">3.4</span><h3>麦克劳林公式</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">3.4</span><h3>麦克劳林公式</h3></div>
         <div class="eq"><span class="m">f(x)=f(0)+f'(0)x+\frac{f''(0)}{2!}x^{2}+\cdots+\frac{f^{(n)}(0)}{n!}x^{n}+R_n(x)</span></div>
         <div class="eq"><span class="m">R_n(x)=\frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1},\quad 0&lt;\theta&lt;1</span></div>
-        <p class="hint">就是 <span class="m">x_0=0</span> 的泰勒公式。考试里 90% 的展开都是它。</p>
+        <p class="hint">就是 <span class="m">x_0=0</span> 的泰勒公式，<span class="m">\xi=\theta x</span>。考试里 90% 的展开都是它；e<sup>x</sup>、sin x、cos x 等各函数的<b>具体余项形式</b>见 3.5。</p>
       </article>
 
-      <article class="card card--wide" data-tag="must">
-        <div class="card__h"><span class="card__no">3.5</span><h3>七个必背展开式</h3><span class="tag tag--must">必背</span></div>
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">3.5</span><h3>七个常用展开式</h3></div>
         <div class="rows">
           <div class="row"><span class="m">e^{x}=1+x+\frac{x^{2}}{2!}+\frac{x^{3}}{3!}+\cdots+\frac{x^{n}}{n!}+o(x^{n})</span><span class="row__note">任意 x</span></div>
           <div class="row"><span class="m">\sin x=x-\frac{x^{3}}{3!}+\frac{x^{5}}{5!}-\cdots+(-1)^{n-1}\frac{x^{2n-1}}{(2n-1)!}+o(x^{2n})</span><span class="row__note">奇函数·只奇次</span></div>
@@ -563,10 +549,23 @@ body.noresult .empty{display:block}
           <div class="row"><span class="m">\tan x=x+\frac{x^{3}}{3}+\frac{2x^{5}}{15}+o(x^{5})</span><span class="row__note">记到 x⁵ 足够</span></div>
         </div>
         <p class="hint"><b>符号口诀</b>：<span class="m">\sin</span> 从 <span class="m">x</span> 起、正负交替、阶乘分母；<span class="m">\cos</span> 从 1 起、同上；<span class="m">\ln(1+x)</span> 各项分母是<b>次数本身</b>（无阶乘）；<span class="m">(1+x)^{\alpha}</span> 分子是一串递减因子。</p>
+
+        <h4>拉格朗日余项形式</h4>
+        <div class="eq"><span class="m">R_{n}(x)=\frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1},\quad 0&lt;\theta&lt;1</span></div>
+        <div class="rows">
+          <div class="row"><span class="m">e^{x}:\quad R_{n}=\frac{e^{\theta x}}{(n+1)!}x^{n+1}</span><span class="row__note">任意 x</span></div>
+          <div class="row"><span class="m">\sin x:\quad R_{n}=\frac{\sin\left(\theta x+\frac{n+1}{2}\pi\right)}{(n+1)!}x^{n+1}</span></div>
+          <div class="row"><span class="m">\cos x:\quad R_{n}=\frac{\cos\left(\theta x+\frac{n+1}{2}\pi\right)}{(n+1)!}x^{n+1}</span></div>
+          <div class="row"><span class="m">\ln(1+x):\quad R_{n}=\frac{(-1)^{n}}{n+1}\cdot\frac{x^{n+1}}{(1+\theta x)^{n+1}}</span><span class="row__note">x&gt;−1</span></div>
+          <div class="row"><span class="m">(1+x)^{\alpha}:\quad R_{n}=\frac{\alpha(\alpha-1)\cdots(\alpha-n)}{(n+1)!}(1+\theta x)^{\alpha-n-1}x^{n+1}</span></div>
+          <div class="row"><span class="m">\frac{1}{1-x}:\quad R_{n}=\frac{x^{n+1}}{(1-\theta x)^{n+2}}</span><span class="row__note">|x|&lt;1</span></div>
+          <div class="row"><span class="m">\tan x</span><span class="row__note">无初等简化式，直接用上面的一般形式</span></div>
+        </div>
+        <p class="hint">上面那组写成 <span class="m">o(x^{n})</span> 的是<b>佩亚诺余项</b>，只说明阶、适合求极限；这组是<b>拉格朗日余项</b>，给出<b>可估计的具体误差</b>，适合证不等式、估精度。用后者要求 <span class="m">f</span> 在含 <span class="m">0</span> 与 <span class="m">x</span> 的区间内 <span class="m">n+1</span> 阶可导，<span class="m">\theta</span> 依赖于 <span class="m">n</span> 与 <span class="m">x</span>，但只保证存在。</p>
       </article>
 
-      <article class="card" data-tag="use">
-        <div class="card__h"><span class="card__no">3.6</span><h3>用展开求极限的三条经验</h3><span class="tag tag--use">会用</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">3.6</span><h3>用展开求极限的三条经验</h3></div>
         <div class="eq"><span class="m">\text{展开到分母的阶即可，多展开是浪费}</span></div>
         <p class="hint">
           <b>①</b> 分母是 <span class="m">x^{k}</span>，分子展开到 <span class="m">x^{k}</span>；<br>
@@ -590,15 +589,15 @@ body.noresult .empty{display:block}
     </div>
     <div class="grid">
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">4.1</span><h3>原函数与不定积分</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">4.1</span><h3>原函数与不定积分</h3></div>
         <div class="eq"><span class="m">F'(x)=f(x)\ \ \text{或}\ \ \mathrm{d}F(x)=f(x)\,\mathrm{d}x</span></div>
         <div class="eq"><span class="m">\int f(x)\,\mathrm{d}x=F(x)+C</span></div>
         <p class="hint">连续函数必有原函数，初等函数在定义区间上有原函数。<b>写完积分一定补 <span class="m">+C</span></b>，这是最便宜的分。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">4.2</span><h3>三条性质</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">4.2</span><h3>三条性质</h3></div>
         <div class="rows">
           <div class="row"><span class="m">\left(\int f(x)\,\mathrm{d}x\right)'=f(x)</span></div>
           <div class="row"><span class="m">\mathrm{d}\!\int f(x)\,\mathrm{d}x=f(x)\,\mathrm{d}x</span></div>
@@ -608,8 +607,8 @@ body.noresult .empty{display:block}
         <p class="hint">积分与求导<b>互为逆运算</b>，但差一个常数；线性性质只对加减和常数倍成立，乘除不行。</p>
       </article>
 
-      <article class="card card--wide" data-tag="must">
-        <div class="card__h"><span class="card__no">4.3</span><h3>基本积分表</h3><span class="tag tag--must">必背</span></div>
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">4.3</span><h3>基本积分表</h3></div>
         <table class="tbl tbl--2col">
           <tbody>
             <tr><td><span class="m">\int x^{\alpha}\,\mathrm{d}x=\frac{x^{\alpha+1}}{\alpha+1}+C\ (\alpha\ne-1)</span></td><td><span class="m">\int\frac{\mathrm{d}x}{x}=\ln|x|+C</span></td></tr>
@@ -629,14 +628,14 @@ body.noresult .empty{display:block}
         <p class="hint">前四组是<b>导数表的镜像</b>，对着 2.7 背最快；<span class="m">\sec</span>、<span class="m">\csc</span> 那两条对数型结果必须硬记。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">4.4</span><h3>第一类换元法（凑微分）</h3><span class="tag tag--must">必背</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">4.4</span><h3>第一类换元法（凑微分）</h3></div>
         <div class="eq"><span class="m">\int f(\varphi(x))\varphi'(x)\,\mathrm{d}x=\int f(u)\,\mathrm{d}u=F(\varphi(x))+C</span></div>
         <p class="hint">判断标志：被积式中<b>存在一个函数和它的导数</b>。把导数那部分塞进 <span class="m">\mathrm{d}(\ )</span> 里，剩下的就是 <span class="m">f(u)\mathrm{d}u</span>。凑完之后不必回代，直接写 <span class="m">F(\varphi(x))</span>。</p>
       </article>
 
-      <article class="card card--wide" data-tag="use">
-        <div class="card__h"><span class="card__no">4.5</span><h3>九种常用凑微分</h3><span class="tag tag--use">会用</span></div>
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">4.5</span><h3>九种常用凑微分</h3></div>
         <table class="tbl tbl--2col">
           <tbody>
             <tr><td><span class="m">\int f(ax+b)\,\mathrm{d}x=\frac{1}{a}\int f(ax+b)\,\mathrm{d}(ax+b)</span></td><td><span class="m">\int f(x^{n})x^{n-1}\,\mathrm{d}x=\frac{1}{n}\int f(x^{n})\,\mathrm{d}x^{n}</span></td></tr>
@@ -646,11 +645,11 @@ body.noresult .empty{display:block}
             <tr><td><span class="m">\int\frac{f(\ln x)}{x}\,\mathrm{d}x=\int f(\ln x)\,\mathrm{d}\ln x</span></td><td></td></tr>
           </tbody>
         </table>
-        <p class="hint">九条与笔记一一对应。负号只出现在 <span class="m">\cos x</span> 那一条，因为 <span class="m">(\cos x)'=-\sin x</span>；其余方向为正。</p>
+        <p class="hint">负号只出现在 <span class="m">\cos x</span> 那一条，因为 <span class="m">(\cos x)'=-\sin x</span>；其余方向为正。</p>
       </article>
 
-      <article class="card" data-tag="use">
-        <div class="card__h"><span class="card__no">4.6</span><h3>第二类换元（三角代换）</h3><span class="tag tag--use">会用</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">4.6</span><h3>第二类换元（三角代换）</h3></div>
         <div class="eq"><span class="m">x=\varphi(t)\ \Rightarrow\ \int f(x)\,\mathrm{d}x=\int f(\varphi(t))\varphi'(t)\,\mathrm{d}t</span></div>
         <div class="rows">
           <div class="row"><span class="m">\sqrt{a^{2}-x^{2}}\ \to\ x=a\sin t</span></div>
@@ -674,8 +673,8 @@ body.noresult .empty{display:block}
     </div>
     <div class="grid">
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">5.1</span><h3>基本关系</h3><span class="tag tag--must">必背 9</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">5.1</span><h3>基本关系</h3></div>
         <div class="rows">
           <div class="row"><span class="m">\sin\alpha\csc\alpha=1</span><span class="m">\cos\alpha\sec\alpha=1</span><span class="m">\tan\alpha\cot\alpha=1</span></div>
           <div class="row"><span class="m">\tan\alpha=\frac{\sin\alpha}{\cos\alpha}</span><span class="m">\cot\alpha=\frac{\cos\alpha}{\sin\alpha}</span></div>
@@ -686,8 +685,8 @@ body.noresult .empty{display:block}
         <p class="hint"><span class="m">\sec^{2}\alpha-\tan^{2}\alpha=1</span> 与上一条同源。<b>九条里真正要记的只有平方关系</b>，其余都能由它除 <span class="m">\cos^{2}</span> 或 <span class="m">\sin^{2}</span> 得到。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">5.2</span><h3>和差角</h3><span class="tag tag--must">必背 3</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">5.2</span><h3>和差角</h3></div>
         <div class="rows">
           <div class="row"><span class="m">\sin(\alpha\pm\beta)=\sin\alpha\cos\beta\pm\cos\alpha\sin\beta</span></div>
           <div class="row"><span class="m">\cos(\alpha\pm\beta)=\cos\alpha\cos\beta\mp\sin\alpha\sin\beta</span></div>
@@ -696,8 +695,8 @@ body.noresult .empty{display:block}
         <p class="hint"><b>sin 符号相同，cos 符号相反</b>（「正同余反」）。tan 是分子同号、分母反号。<b>这一组是全表的源头</b>，其余都能由它推。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">5.3</span><h3>倍角</h3><span class="tag tag--must">必背 3</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">5.3</span><h3>倍角</h3></div>
         <div class="rows">
           <div class="row"><span class="m">\sin2\alpha=2\sin\alpha\cos\alpha</span></div>
           <div class="row"><span class="m">\cos2\alpha=\cos^{2}\alpha-\sin^{2}\alpha=2\cos^{2}\alpha-1=1-2\sin^{2}\alpha</span></div>
@@ -706,21 +705,21 @@ body.noresult .empty{display:block}
         <p class="hint"><span class="m">\cos2\alpha</span> 三种形式都要会用：<b>积分降幂用含平方的两种，解方程用含单函数的两种</b>。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">5.4</span><h3>降幂</h3><span class="tag tag--must">必背 4 · 会用 2</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">5.4</span><h3>降幂</h3></div>
         <div class="rows">
           <div class="row"><span class="m">\sin^{2}\alpha=\frac{1-\cos2\alpha}{2}</span></div>
           <div class="row"><span class="m">\cos^{2}\alpha=\frac{1+\cos2\alpha}{2}</span></div>
           <div class="row"><span class="m">\tan^{2}\alpha=\frac{1-\cos2\alpha}{1+\cos2\alpha}</span></div>
           <div class="row"><span class="m">\sin^{2}\alpha\cos^{2}\alpha=\frac{1-\cos4\alpha}{8}</span></div>
-          <div class="row"><span class="m">\sin^{4}\alpha=\frac{3-4\cos2\alpha+\cos4\alpha}{8}</span><span class="row__note">会用</span></div>
-          <div class="row"><span class="m">\cos^{4}\alpha=\frac{3+4\cos2\alpha+\cos4\alpha}{8}</span><span class="row__note">会用</span></div>
+          <div class="row"><span class="m">\sin^{4}\alpha=\frac{3-4\cos2\alpha+\cos4\alpha}{8}</span></div>
+          <div class="row"><span class="m">\cos^{4}\alpha=\frac{3+4\cos2\alpha+\cos4\alpha}{8}</span></div>
         </div>
         <p class="hint">后两条是 <span class="m">\int\sin^{4}x\,\mathrm{d}x</span> 的<b>唯一入口</b>：四次幂一次降到 <span class="m">\cos4x</span>，逐次降幂会绕远。</p>
       </article>
 
-      <article class="card" data-tag="use">
-        <div class="card__h"><span class="card__no">5.5</span><h3>半角</h3><span class="tag tag--use">会用 3</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">5.5</span><h3>半角</h3></div>
         <div class="rows">
           <div class="row"><span class="m">\sin\frac{\alpha}{2}=\pm\sqrt{\frac{1-\cos\alpha}{2}}</span></div>
           <div class="row"><span class="m">\cos\frac{\alpha}{2}=\pm\sqrt{\frac{1+\cos\alpha}{2}}</span></div>
@@ -729,8 +728,8 @@ body.noresult .empty{display:block}
         <p class="hint">正负由 <span class="m">\frac{\alpha}{2}</span> 所在象限决定。实际计算<b>优先用后两个无根号形式</b>，分子分母顺序不可颠倒。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">5.6</span><h3>积化和差</h3><span class="tag tag--must">必背 4</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">5.6</span><h3>积化和差</h3></div>
         <div class="rows">
           <div class="row"><span class="m">\sin\alpha\cos\beta=\frac{1}{2}\left[\sin(\alpha+\beta)+\sin(\alpha-\beta)\right]</span></div>
           <div class="row"><span class="m">\cos\alpha\sin\beta=\frac{1}{2}\left[\sin(\alpha+\beta)-\sin(\alpha-\beta)\right]</span></div>
@@ -740,8 +739,8 @@ body.noresult .empty{display:block}
         <p class="hint"><b>只有第四条带减号，且差角在前</b>；其余三条一律相加。作用是化不同频率的乘积为可积的和差。</p>
       </article>
 
-      <article class="card" data-tag="use">
-        <div class="card__h"><span class="card__no">5.7</span><h3>和差化积</h3><span class="tag tag--use">会用 4</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">5.7</span><h3>和差化积</h3></div>
         <div class="rows">
           <div class="row"><span class="m">\sin A+\sin B=2\sin\frac{A+B}{2}\cos\frac{A-B}{2}</span></div>
           <div class="row"><span class="m">\sin A-\sin B=2\cos\frac{A+B}{2}\sin\frac{A-B}{2}</span></div>
@@ -751,8 +750,8 @@ body.noresult .empty{display:block}
         <p class="hint">可由 5.6 倒推。<b>最后一行的负号独立存在</b>，是全表唯一的独立负号，抄写时写明显些。</p>
       </article>
 
-      <article class="card" data-tag="use">
-        <div class="card__h"><span class="card__no">5.8</span><h3>万能公式</h3><span class="tag tag--use">会用 4</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">5.8</span><h3>万能公式</h3></div>
         <div class="eq"><span class="m">t=\tan\frac{x}{2}</span></div>
         <div class="rows">
           <div class="row"><span class="m">\sin x=\frac{2t}{1+t^{2}}</span><span class="m">\cos x=\frac{1-t^{2}}{1+t^{2}}</span></div>
@@ -761,14 +760,14 @@ body.noresult .empty{display:block}
         <p class="hint">保证三角有理式必可积，但计算量大。<b>只在凑微分、辅助角都失效时用</b>。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">5.9</span><h3>辅助角</h3><span class="tag tag--must">必背 1</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">5.9</span><h3>辅助角</h3></div>
         <div class="eq"><span class="m">a\sin x+b\cos x=\sqrt{a^{2}+b^{2}}\,\sin(x+\varphi),\quad \tan\varphi=\frac{b}{a}</span></div>
         <p class="hint">用于 <span class="m">\int\frac{\mathrm{d}x}{a\sin x+b\cos x}</span> 型：合并后套 <span class="m">\int\csc u\,\mathrm{d}u=\ln|\csc u-\cot u|</span>。注意 <span class="m">\varphi</span> 的象限由 <span class="m">(a,b)</span> 的符号决定。</p>
       </article>
 
-      <article class="card" data-tag="must">
-        <div class="card__h"><span class="card__no">5.10</span><h3>高频变形</h3><span class="tag tag--must">必背 6</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">5.10</span><h3>高频变形</h3></div>
         <div class="rows">
           <div class="row"><span class="m">1-\cos x=2\sin^{2}\frac{x}{2}</span></div>
           <div class="row"><span class="m">1+\cos x=2\cos^{2}\frac{x}{2}</span></div>
@@ -780,8 +779,8 @@ body.noresult .empty{display:block}
         <p class="hint">第 5 条是习题 4-2 第 (22)(23) 的关键一步；第 6 条用于 <span class="m">\int\frac{\mathrm{d}x}{\sec x+\tan x}</span>，来源是 <span class="m">\sec^{2}x-\tan^{2}x=1</span>。</p>
       </article>
 
-      <article class="card" data-tag="know">
-        <div class="card__h"><span class="card__no">5.11</span><h3>三倍角</h3><span class="tag tag--know">了解 2</span></div>
+      <article class="card">
+        <div class="card__h"><span class="card__no">5.11</span><h3>三倍角</h3></div>
         <div class="rows">
           <div class="row"><span class="m">\sin3\alpha=3\sin\alpha-4\sin^{3}\alpha</span></div>
           <div class="row"><span class="m">\cos3\alpha=4\cos^{3}\alpha-3\cos\alpha</span></div>
@@ -789,8 +788,8 @@ body.noresult .empty{display:block}
         <p class="hint">反解即得降幂形式：<span class="m">\sin^{3}\alpha=\frac{3\sin\alpha-\sin3\alpha}{4}</span>、<span class="m">\cos^{3}\alpha=\frac{3\cos\alpha+\cos3\alpha}{4}</span>，用于奇次幂积分。</p>
       </article>
 
-      <article class="card card--wide" data-tag="must">
-        <div class="card__h"><span class="card__no">5.12</span><h3>特殊角</h3><span class="tag tag--must">必背</span></div>
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">5.12</span><h3>特殊角</h3></div>
         <table class="tbl">
           <thead><tr><th>x</th><th>0</th><th>π/6</th><th>π/4</th><th>π/3</th><th>π/2</th></tr></thead>
           <tbody>
@@ -816,8 +815,8 @@ body.noresult .empty{display:block}
     </div>
     <div class="grid">
 
-      <article class="card card--wide" data-tag="must">
-        <div class="card__h"><span class="card__no">A</span><h3>推导主线</h3><span class="tag tag--must">必背</span></div>
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">A</span><h3>推导主线</h3></div>
         <div class="rows">
           <div class="row"><span class="m">\sin(\alpha+\beta)\ \longrightarrow\ \sin2\alpha\qquad(\beta=\alpha)</span></div>
           <div class="row"><span class="m">\longrightarrow\ \text{半角}\ \ \left(\alpha\to\tfrac{\alpha}{2}\right)\ \longrightarrow\ \text{降幂}\ \ (\text{反解})</span></div>
@@ -827,8 +826,8 @@ body.noresult .empty{display:block}
         <p class="hint">真正需要死记的只有<b>平方关系</b>与<b>和角公式</b>，其余全部由此推出。</p>
       </article>
 
-      <article class="card card--wide" data-tag="use">
-        <div class="card__h"><span class="card__no">B</span><h3>第二类换元回代</h3><span class="tag tag--use">会用</span></div>
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">B</span><h3>第二类换元回代</h3></div>
         <p class="hint" style="border:none;padding:0;margin:0 0 10px">回代靠<b>画直角三角形直接读数</b>，不必求反函数。</p>
         <table class="tbl">
           <thead><tr><th>代换</th><th>对边</th><th>邻边</th><th>斜边</th><th>直接读出</th></tr></thead>
@@ -849,8 +848,8 @@ body.noresult .empty{display:block}
         </table>
       </article>
 
-      <article class="card card--wide" data-tag="use">
-        <div class="card__h"><span class="card__no">C</span><h3>按被积式查表</h3><span class="tag tag--use">会用</span></div>
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">C</span><h3>按被积式查表</h3></div>
         <table class="tbl">
           <thead><tr><th>遇到什么</th><th>用哪组</th><th>落到哪条基本积分</th></tr></thead>
           <tbody>
@@ -866,8 +865,8 @@ body.noresult .empty{display:block}
         </table>
       </article>
 
-      <article class="card card--wide" data-tag="must">
-        <div class="card__h"><span class="card__no">D</span><h3>易错四条</h3><span class="tag tag--must">必背</span></div>
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">D</span><h3>易错四条</h3></div>
         <div class="rows">
           <div class="row"><b>1</b><span class="m">\int\sin5x\,\mathrm{d}x=-\frac{\cos5x}{5}+C</span><span class="row__note">别漏负号</span></div>
           <div class="row"><b>2</b><span class="m">\int\cos2\omega t\,\mathrm{d}t=\frac{\sin2\omega t}{2\omega}+C</span><span class="row__note">线性内层取倒数</span></div>
@@ -877,23 +876,9 @@ body.noresult .empty{display:block}
         <p class="hint">第 1、2 条本质是同一件事：<b>内层是 <span class="m">kx</span>，积分后要除 <span class="m">k</span></b>。乘在里面的系数一律取倒数提出来。</p>
       </article>
 
-    <article class="card card--wide" data-tag="use">
-        <div class="card__h"><span class="card__no">E</span><h3>与原笔记的四处差异</h3><span class="tag tag--use">勘误</span></div>
-        <table class="tbl">
-          <thead><tr><th>位置</th><th>手写原稿</th><th>本手册的写法</th></tr></thead>
-          <tbody>
-            <tr><td>§1.6 第二个重要极限</td><td><span class="m">\lim_{x\to\infty}\left(1+\frac{1}{x}\right)^{n}=e</span></td><td>指数应为 <span class="m">x</span>（写成 <span class="m">n</span> 时，<span class="m">x\to\infty</span> 该式趋于 1）</td></tr>
-            <tr><td>§1.6 标注 ③</td><td><span class="m">n\to 1</span> 时 <span class="m">\ln u\sim u-1</span></td><td>应为 <span class="m">u\to 1</span></td></tr>
-            <tr><td>§1.7 阶的定义表</td><td><span class="m">\lim\frac{\alpha}{\beta^{k}}=c\ne 0</span> ⇒ α 是 β 的 k 阶</td><td>笔记无误；上一版手册写反成「β 是 α 的 k 阶」，已订正</td></tr>
-            <tr><td>§4.1 积分表首条</td><td><span class="m">\int x^{\alpha}\,\mathrm{d}x</span></td><td>笔记用 <span class="m">\alpha</span>，上一版误作 <span class="m">\mu</span>，已统一</td></tr>
-          </tbody>
-        </table>
-        <p class="hint">其余逐条核对全部一致：两个重要极限、无穷小的阶、导数定义与十六条导数公式、高阶导数与莱布尼茨、泰勒两种余项与七个展开式、二十余条积分表与九种凑微分，以及三角公式十二组（另按恒等变形独立验算过一遍）。</p>
-      </article>
-
     </div>
     <div class="foot">
-      <span>依据 §1.6–§4.2 课堂笔记与三角函数全表整理 · 已逐条校对</span>
+      <span>高等数学（第一学期）公式速查 · 逐条校对</span>
       <span>2026.11.11 · 单文件离线可用 · 建议按 <b>/</b> 快速检索</span>
     </div>
   </section>
@@ -932,57 +917,33 @@ body.noresult .empty{display:block}
   }
 
   /* ---------- 计数 ---------- */
-  var cards = Array.prototype.slice.call(document.querySelectorAll(".card[data-tag]"));
-  var tally = { all: cards.length, must: 0, use: 0, know: 0 };
-  cards.forEach(function(c){ tally[c.dataset.tag] = (tally[c.dataset.tag] || 0) + 1; });
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".card"));
+  var totalEl = document.getElementById("nTotal");
+  if (totalEl) totalEl.textContent = cards.length;
 
-  document.getElementById("nTotal").textContent = tally.all;
-  document.getElementById("nMust").textContent  = tally.must;
-  document.getElementById("nUse").textContent   = tally.use;
-  document.getElementById("nKnow").textContent  = tally.know;
-
-  Object.keys(tally).forEach(function(k){
-    var b = document.querySelector('[data-c="' + k + '"]');
-    if (b) b.textContent = tally[k];
-  });
-
-  /* ---------- 章节计数 ---------- */
   document.querySelectorAll(".ch").forEach(function(ch){
-    var n = ch.querySelectorAll(".card[data-tag]").length;
+    var n = ch.querySelectorAll(".card").length;
     var em = document.querySelector('em[data-n="' + ch.id + '"]');
     if (em) em.textContent = n;
   });
 
-  /* ---------- 筛选 + 搜索 ---------- */
-  var filter = "all";
+  /* ---------- 搜索 ---------- */
   var query = "";
   var body = document.body;
 
   function apply(){
     var shown = 0;
     cards.forEach(function(c){
-      var okTag = (filter === "all") || (c.dataset.tag === filter);
-      var okQ = !query || (c.textContent + " " + (c.dataset.tex || "")).toLowerCase().indexOf(query) > -1;
-      var vis = okTag && okQ;
-      c.classList.toggle("is-hidden", !vis);
-      if (vis) shown++;
+      var ok = !query || (c.textContent + " " + (c.dataset.tex || "")).toLowerCase().indexOf(query) > -1;
+      c.classList.toggle("is-hidden", !ok);
+      if (ok) shown++;
     });
     document.querySelectorAll(".ch").forEach(function(ch){
-      var any = ch.querySelectorAll(".card[data-tag]:not(.is-hidden)").length > 0;
+      var any = ch.querySelectorAll(".card:not(.is-hidden)").length > 0;
       ch.classList.toggle("is-hidden", !any);
     });
     body.classList.toggle("noresult", shown === 0);
   }
-
-  document.querySelectorAll(".chip[data-filter]").forEach(function(btn){
-    btn.addEventListener("click", function(){
-      filter = btn.dataset.filter;
-      document.querySelectorAll(".chip[data-filter]").forEach(function(b){
-        b.setAttribute("aria-pressed", String(b === btn));
-      });
-      apply();
-    });
-  });
 
   var input = document.getElementById("q");
   input.addEventListener("input", function(){
