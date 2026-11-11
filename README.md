@@ -2,7 +2,9 @@
 
 Calculus I Cheatsheet — 高等数学（第一学期）必背速查手册。单文件网页，双击即开，断网可用，可打印。
 
-**打开**：`高等数学必背手册.html`
+- **在线访问**：https://wtsswt.github.io/calculus-cheatsheet/
+- **仓库地址**：https://github.com/wtsswt/calculus-cheatsheet
+- **本地打开**：`index.html`
 
 ## 里面有什么
 
