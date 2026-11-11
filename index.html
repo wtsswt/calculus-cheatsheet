@@ -151,12 +151,14 @@ main{padding:0 46px 140px 46px;min-width:0}
 /* ---------- 公式 ---------- */
 .rows{display:flex;flex-direction:column;gap:9px}
 .row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;min-width:0}
-.row .m{flex:0 1 auto;min-width:0;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.row .m{flex:0 1 auto;min-width:0;max-width:100%;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain}
 .row__note{margin-left:auto;font-size:13px;color:var(--ink-3);letter-spacing:.01em;white-space:nowrap}
 .eq{position:relative;margin:2px 0 10px;padding:4px 0 4px 12px;border-left:2px solid var(--rule-2);overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
 .eq .m{display:block}
 .m{font-size:1.05em;line-height:1.55}
 .m math{font-size:1.08em}
+/* MathML 里的 annotation 不参与渲染，却会撑高公式框（形成可上下滑动的假溢出） */
+.m math annotation,.m math annotation-xml{display:none}
 .hint{
   margin:12px 0 0;padding-top:10px;border-top:1px dashed var(--rule);
   font-size:13.5px;color:var(--ink-3);line-height:1.74;
@@ -193,6 +195,10 @@ body.noresult .empty{display:block}
 
 /* ---------- 页脚 ---------- */
 .foot{margin-top:60px;padding-top:22px;border-top:1px solid var(--rule);font-size:13px;color:var(--ink-3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.colophon{
+  margin:9px 0 0;text-align:right;font-family:var(--mono);
+  font-size:11px;line-height:1.6;letter-spacing:.08em;color:var(--ink-3);
+}
 
 /* ---------- 手机章节导航 ---------- */
 .mnav{
@@ -255,7 +261,7 @@ body.noresult .empty{display:block}
   .eq{padding-left:9px;margin:3px 0 11px}
   .hint{font-size:13.5px;line-height:1.82}
   .card h4{font-size:13.5px}
-  .tbl{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:13.5px;overscroll-behavior-x:contain}
+  .tbl{display:block;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;font-size:13.5px;overscroll-behavior-x:contain}
   .tbl>thead,.tbl>tbody{display:table;width:100%;border-collapse:collapse}
   .tbl th{white-space:normal}
   .tbl td:first-child{white-space:normal}
@@ -281,17 +287,18 @@ body.noresult .empty{display:block}
   .tbl--flat tr:last-child{border-bottom:none}
   .tbl--flat td{
     display:block;width:auto;border:none;padding:4px 0;white-space:normal;
-    overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;
+    overflow-x:auto;overflow-y:hidden;scrollbar-width:none;overscroll-behavior-x:contain;
   }
   .tbl--flat td::-webkit-scrollbar{display:none}
   .foot{margin-top:36px;font-size:13px;gap:10px}
+  .colophon{margin-top:14px;font-size:11px;text-align:center}
 }
 
 /* ---------- 打印 ---------- */
 @media print{
   :root{--paper:#fff;--card:#fff;--rule:#d6d0c2;--rule-2:#e8e3d6}
   body{background:#fff;background-image:none;font-size:11px}
-  .rail,.bar,.foot,.hero__actions{display:none!important}
+  .rail,.bar,.foot,.colophon,.hero__actions{display:none!important}
   .wrap{display:block;max-width:none}
   main{padding:0}
   .hero{padding:0 0 14px;border-bottom:1.5px solid #000}
@@ -969,6 +976,7 @@ body.noresult .empty{display:block}
       <span>高等数学（第一学期）公式速查 · 逐条校对</span>
       <span>2026.11.11 · 单文件离线可用 · 建议按 <b>/</b> 快速检索</span>
     </div>
+    <p class="colophon">swt·AI辅助生成</p>
   </section>
 
 </main>
