@@ -194,8 +194,9 @@ body.noresult .empty{display:block}
 /* ---------- 页脚 ---------- */
 .foot{margin-top:60px;padding-top:22px;border-top:1px solid var(--rule);font-size:13px;color:var(--ink-3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .colophon{
-  margin:9px 0 0;text-align:right;font-family:var(--mono);
-  font-size:11px;line-height:1.6;letter-spacing:.08em;color:var(--ink-3);
+  margin:9px 0 0;padding-bottom:calc(6px + env(safe-area-inset-bottom));
+  text-align:right;font-family:var(--mono);
+  font-size:11px;line-height:1.6;letter-spacing:.08em;color:#6b665c;
 }
 
 /* ---------- 手机章节导航 ---------- */
@@ -968,7 +969,7 @@ body.noresult .empty{display:block}
     <div class="foot">
       <span>高等数学（第一学期）公式速查 · 逐条校对</span>
     </div>
-    <p class="colophon">swt·AI辅助生成</p>
+    <p class="colophon">© 2026 swt · AI 辅助生成</p>
   </section>
 
 </main>
