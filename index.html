@@ -1053,6 +1053,7 @@ body.noresult .empty{display:block}
       ch.classList.toggle("is-hidden", !any);
     });
     body.classList.toggle("noresult", shown === 0);
+    syncActive();   /* 过滤改变了文档高度，重算目录高亮 */
   }
 
   var input = document.getElementById("q");
@@ -1093,23 +1094,64 @@ body.noresult .empty{display:block}
   /* ---------- 目录高亮 ---------- */
   var links = Array.prototype.slice.call(document.querySelectorAll(".nav__a"));
   var mlinks = Array.prototype.slice.call(document.querySelectorAll(".mnav a"));
-  var secs = links.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+  var secs = links.map(function(a){ return document.querySelector(a.getAttribute("href")); })
+                  .filter(function(s){ return !!s; });
   function setActive(id){
     links.forEach(function(a){ a.classList.toggle("on", a.getAttribute("href") === "#" + id); });
     mlinks.forEach(function(a){ a.classList.toggle("on", a.getAttribute("href") === "#" + id); });
   }
-  if ("IntersectionObserver" in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){ if (en.isIntersecting) setActive(en.target.id); });
-    }, { rootMargin: "-8% 0px -70% 0px", threshold: 0 });
-    secs.forEach(function(s){ if (s) io.observe(s); });
+
+  /* 高亮只由滚动位置决定：取最后一个已越过参考线的章节。
+     参考线 = max(锚点落点偏移, 视口 14%)，「跳转落点」与「手动滑动」判定才一致。 */
+  var activeId = null, lockUntil = 0;
+  function refLine(){
+    var pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    var mar = secs.length ? (parseFloat(getComputedStyle(secs[0]).scrollMarginTop) || 0) : 0;
+    return Math.max(pad + mar + 24, window.innerHeight * 0.14);
   }
+  function currentId(){
+    if (!secs.length) return null;
+    var line = refLine(), id = null;
+    for (var i = 0; i < secs.length; i++){
+      if (!secs[i].getClientRects().length) continue;   /* 被搜索过滤隐藏的章节不参与 */
+      if (secs[i].getBoundingClientRect().top <= line) id = secs[i].id;
+    }
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4){
+      id = secs[secs.length - 1].id;
+    }
+    return id || secs[0].id;
+  }
+  function syncActive(){
+    if (Date.now() < lockUntil) return;
+    var id = currentId();
+    if (id && id !== activeId){ activeId = id; setActive(id); }
+  }
+  /* scroll 事件本身就是帧级节流，不必再套 rAF；直接算，省掉一层调度也避免被暂停 */
+  window.addEventListener("scroll", syncActive, { passive: true });
+  window.addEventListener("resize", syncActive, { passive: true });
+  if ("onscrollend" in window){
+    window.addEventListener("scrollend", function(){ lockUntil = 0; syncActive(); });
+  }
+
   links.concat(mlinks).forEach(function(a){
     a.addEventListener("click", function(){
-      setActive(a.getAttribute("href").slice(1));
-      a.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+      var id = a.getAttribute("href").slice(1);
+      activeId = id;
+      setActive(id);
+      lockUntil = Date.now() + 900;   /* 平滑滚动期间不跟随，滚完按位置校准 */
+      var nav = a.parentElement;
+      if (nav && nav.classList && nav.classList.contains("mnav")){
+        /* 导航条只做自己的横向居中，不用 scrollIntoView 去碰垂直滚动 */
+        nav.scrollTo({
+          left: Math.max(0, a.offsetLeft - (nav.clientWidth - a.offsetWidth) / 2),
+          behavior: "smooth"
+        });
+      }
+      /* 平滑滚动结束后的兜底校准（scrollend 不一定触发、长距离滚动也可能超过 900ms） */
+      setTimeout(function(){ lockUntil = 0; syncActive(); }, 950);
     });
   });
+  syncActive();
 
   apply();
 })();
