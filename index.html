@@ -192,12 +192,8 @@ body.test .card__h::after{content:"";position:absolute;inset:0;pointer-events:no
 body.noresult .empty{display:block}
 
 /* ---------- 页脚 ---------- */
-.foot{margin-top:60px;padding-top:22px;border-top:1px solid var(--rule);font-size:13px;color:var(--ink-3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.colophon{
-  margin:9px 0 0;padding-bottom:calc(6px + env(safe-area-inset-bottom));
-  text-align:right;font-family:var(--mono);
-  font-size:11px;line-height:1.6;letter-spacing:.08em;color:#6b665c;
-}
+.foot{margin-top:60px;padding-top:22px;border-top:1px solid var(--rule);font-size:13px;color:var(--ink-3);display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.foot .sign{font-family:var(--mono);font-size:11px;line-height:1.6;letter-spacing:.08em;color:#6b665c}
 
 /* ---------- 手机章节导航 ---------- */
 .mnav{
@@ -290,14 +286,14 @@ body.noresult .empty{display:block}
   }
   .tbl--flat td::-webkit-scrollbar{display:none}
   .foot{margin-top:36px;font-size:13px;gap:10px}
-  .colophon{margin-top:14px;font-size:11px;text-align:center}
+  .foot .sign{margin-left:auto}
 }
 
 /* ---------- 打印 ---------- */
 @media print{
   :root{--paper:#fff;--card:#fff;--rule:#d6d0c2;--rule-2:#e8e3d6}
   body{background:#fff;background-image:none;font-size:11px}
-  .rail,.bar,.foot,.colophon,.hero__actions{display:none!important}
+  .rail,.bar,.foot,.hero__actions{display:none!important}
   .wrap{display:block;max-width:none}
   main{padding:0}
   .hero{padding:0 0 14px;border-bottom:1.5px solid #000}
@@ -968,8 +964,8 @@ body.noresult .empty{display:block}
     </div>
     <div class="foot">
       <span>高等数学（第一学期）公式速查 · 逐条校对</span>
+      <span class="sign">© 2026 swt · AI 辅助生成</span>
     </div>
-    <p class="colophon">© 2026 swt · AI 辅助生成</p>
   </section>
 
 </main>
