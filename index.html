@@ -669,7 +669,7 @@ body.noresult .empty{display:block}
       <div class="ch__num">04</div>
       <div>
         <h2 class="ch__h2">不定积分</h2>
-        <p class="ch__sub">§4.1 概念与性质 · 基本积分表 · §4.2 第一类换元法</p>
+        <p class="ch__sub">§4.1 概念与性质 · 基本积分表 · §4.2 两类换元 · §4.3 分部积分 · §4.4 有理函数积分</p>
       </div>
       <div class="ch__rule"></div>
     </div>
@@ -743,6 +743,80 @@ body.noresult .empty{display:block}
           <div class="row"><span class="m">\sqrt{x^{2}-a^{2}}\ \to\ x=a\sec t</span></div>
         </div>
         <p class="hint">回代<b>画直角三角形直接读数</b>，不必求反函数 → 见 <a href="#c6" style="border-bottom:1px solid var(--rule)">附录 B</a>。</p>
+      </article>
+
+      <article class="card">
+        <div class="card__h"><span class="card__no">4.7</span><h3>第二类换元：根式 · 倒代换</h3></div>
+        <div class="rows">
+          <div class="row"><span class="m">\sqrt{ax+b}\ \to\ t=\sqrt{ax+b},\ \ x=\frac{t^{2}-b}{a}</span></div>
+          <div class="row"><span class="m">\sqrt{\dfrac{ax+b}{cx+d}}\ \to\ t=\sqrt{\dfrac{ax+b}{cx+d}}</span></div>
+          <div class="row"><span class="m">x^{\frac{1}{m}},\ x^{\frac{1}{n}}\ \to\ t=x^{\frac{1}{k}},\ k=[m,n]</span></div>
+          <div class="row"><span class="m">\text{分母次数偏高}\ \to\ x=\dfrac{1}{t}</span><span class="row__note">倒代换</span></div>
+        </div>
+        <p class="hint">目的只有一个：<b>把根式全变成整数次幂</b>。三角代换不是必须的 —— 被积式里明明是 <span class="m">\sqrt{2x+1}</span>，硬去配方令 <span class="m">x=\tan t</span> 只会把题做死。</p>
+      </article>
+
+      <article class="card">
+        <div class="card__h"><span class="card__no">4.8</span><h3>分部积分公式</h3></div>
+        <div class="eq"><span class="m">\int u\,\mathrm{d}v=uv-\int v\,\mathrm{d}u</span></div>
+        <div class="eq"><span class="m">\int uv'\,\mathrm{d}x=uv-\int u'v\,\mathrm{d}x</span></div>
+        <p class="hint">选 <span class="m">u</span> 按<b>「反对幂指三」</b>：反三角 → 对数 → 幂 → 指数 → 三角，<b>排在前面的当 u</b>，剩下的连同 <span class="m">\mathrm{d}x</span> 作 <span class="m">\mathrm{d}v</span>。两条判据：① <span class="m">v</span> 要好求；② <span class="m">\int v\,\mathrm{d}u</span> 要比原积分好算。对数、反三角出现时几乎总是它们当 <span class="m">u</span>。</p>
+      </article>
+
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">4.9</span><h3>分部积分怎么收尾</h3></div>
+        <table class="tbl tbl--stack">
+          <thead><tr><th>题型</th><th>标志</th><th>收尾动作</th></tr></thead>
+          <tbody>
+            <tr><td>降次</td><td><span class="m">x^{n}e^{x},\ x^{n}\sin x</span></td><td>每分一次幂次降 1，分到 <span class="m">x^{0}</span> 为止</td></tr>
+            <tr><td>循环</td><td><span class="m">e^{ax}\sin bx,\ \sec^{3}x</span></td><td>两次分部回到原式，移项解出；<b>两次 u 取同一类</b>，<span class="m">C</span> 只加一次</td></tr>
+            <tr><td>递推</td><td><span class="m">I_{n}</span> 含自然数 <span class="m">n</span></td><td>分部一次，得 <span class="m">I_{n}</span> 与 <span class="m">I_{n-1}</span>（或 <span class="m">I_{n-2}</span>）的关系</td></tr>
+            <tr><td>抽象</td><td>只给「<span class="m">f</span> 的一个原函数是 <span class="m">F</span>」</td><td><span class="m">\int xf'(x)\,\mathrm{d}x=xf(x)-\int f(x)\,\mathrm{d}x</span></td></tr>
+          </tbody>
+        </table>
+        <div class="rows">
+          <div class="row"><span class="m">I_{n}=\int\frac{\mathrm{d}x}{(x^{2}+a^{2})^{n}}=\frac{x}{2a^{2}(n-1)(x^{2}+a^{2})^{n-1}}+\frac{2n-3}{2a^{2}(n-1)}I_{n-1}</span></div>
+          <div class="row"><span class="m">\int\tan^{n}x\,\mathrm{d}x=\frac{\tan^{n-1}x}{n-1}-\int\tan^{n-2}x\,\mathrm{d}x</span></div>
+        </div>
+        <p class="hint">循环型丢分点不在积分，在<b>移项后忘记除系数</b>：<span class="m">\int e^{x}\sin x\,\mathrm{d}x=\frac{e^{x}(\sin x-\cos x)}{2}+C</span>。</p>
+      </article>
+
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">4.10</span><h3>有理函数：先除后拆</h3></div>
+        <p class="hint" style="border:none;padding:0;margin:0 0 10px"><span class="m">\deg P\ge\deg Q</span> 时 <span class="m">\frac{P}{Q}</span> 是<b>假分式</b>，必须先做多项式除法，拆成「多项式 + 真分式」再往下走。</p>
+        <table class="tbl tbl--stack">
+          <thead><tr><th>Q 中的因式</th><th>拆成</th><th>待定常数</th></tr></thead>
+          <tbody>
+            <tr><td><span class="m">(x-a)</span></td><td><span class="m">\frac{A}{x-a}</span></td><td>1 个</td></tr>
+            <tr><td><span class="m">(x-a)^{\lambda}</span></td><td><span class="m">\frac{A_{1}}{x-a}+\frac{A_{2}}{(x-a)^{2}}+\cdots+\frac{A_{\lambda}}{(x-a)^{\lambda}}</span></td><td><span class="m">\lambda</span> 个</td></tr>
+            <tr><td><span class="m">x^{2}+px+q\ (p^{2}-4q<0)</span></td><td><span class="m">\frac{Mx+N}{x^{2}+px+q}</span></td><td>2 个</td></tr>
+            <tr><td><span class="m">(x^{2}+px+q)^{\mu}</span></td><td><span class="m">\sum_{i=1}^{\mu}\frac{M_{i}x+N_{i}}{(x^{2}+px+q)^{i}}</span></td><td><span class="m">2\mu</span> 个</td></tr>
+          </tbody>
+        </table>
+        <p class="hint">待定常数总数 = <span class="m">\deg Q</span>，拿来<b>验算有没有漏项</b>。求系数两条路：通分后比较同次幂，或代 <span class="m">x=a</span> 等特殊值；有重根时代值更快。</p>
+      </article>
+
+      <article class="card card--wide">
+        <div class="card__h"><span class="card__no">4.11</span><h3>四种最简分式怎么积</h3></div>
+        <table class="tbl tbl--2col tbl--flat">
+          <tbody>
+            <tr><td><span class="m">\int\frac{A}{x-a}\,\mathrm{d}x=A\ln|x-a|+C</span></td><td><span class="m">\int\frac{A}{(x-a)^{n}}\,\mathrm{d}x=\frac{A}{(1-n)(x-a)^{n-1}}+C</span></td></tr>
+            <tr><td><span class="m">\int\frac{Mx+N}{x^{2}+px+q}\,\mathrm{d}x=\frac{M}{2}\ln(x^{2}+px+q)+\frac{2N-Mp}{\sqrt{4q-p^{2}}}\arctan\frac{2x+p}{\sqrt{4q-p^{2}}}+C</span></td><td><span class="m">\int\frac{Mx+N}{(x^{2}+px+q)^{n}}\,\mathrm{d}x</span>：同一拆法，前项成幂次，后项用 4.9 递推</td></tr>
+          </tbody>
+        </table>
+        <p class="hint">公式不必背，背<b>拆法</b>：分子拆成 <span class="m">\frac{M}{2}(2x+p)+\left(N-\frac{Mp}{2}\right)</span>，前一块是分母的导数 → 对数；后一块是常数 → 配方后 arctan。</p>
+      </article>
+
+      <article class="card">
+        <div class="card__h"><span class="card__no">4.12</span><h3>三角有理式：万能代换</h3></div>
+        <div class="eq"><span class="m">t=\tan\frac{x}{2}</span></div>
+        <div class="rows">
+          <div class="row"><span class="m">\sin x=\frac{2t}{1+t^{2}}</span></div>
+          <div class="row"><span class="m">\cos x=\frac{1-t^{2}}{1+t^{2}}</span></div>
+          <div class="row"><span class="m">\mathrm{d}x=\frac{2\,\mathrm{d}t}{1+t^{2}}</span></div>
+          <div class="row"><span class="m">\tan x=\frac{2t}{1-t^{2}}</span></div>
+        </div>
+        <p class="hint">它保证<b>一定能积出来</b>，但会把分母升到二次、计算量最大，所以放最后试：先看能否凑 <span class="m">\mathrm{d}\sin x</span>、<span class="m">\mathrm{d}\cos x</span>、<span class="m">\mathrm{d}\tan x</span>；只有 <span class="m">\sin^{2}</span>、<span class="m">\cos^{2}</span> 的用 <span class="m">\tan x=u</span>；都不行才上万能代换。</p>
       </article>
 
     </div>
@@ -945,20 +1019,25 @@ body.noresult .empty{display:block}
             <tr><td>三角乘积、频率不同</td><td>5.6 积化和差</td><td>化成和差后逐项积</td></tr>
             <tr><td>分母含 <span class="m">1\pm\cos x</span></td><td>5.10 前两条</td><td><span class="m">\int\csc^{2}\frac{x}{2}</span></td></tr>
             <tr><td>分母为一次三角式两项相加</td><td>5.9 辅助角</td><td><span class="m">\int\csc u\,\mathrm{d}u</span></td></tr>
-            <tr><td>以上全部失效</td><td>5.8 万能公式</td><td>有理函数积分</td></tr>
+            <tr><td>有理式，分子次数低于分母</td><td>4.10 拆项</td><td>4.11 四种最简分式</td></tr>
+            <tr><td>含 <span class="m">\sqrt{ax+b}</span> 或 <span class="m">\sqrt{\frac{ax+b}{cx+d}}</span></td><td>4.7 根式代换</td><td>化为有理函数</td></tr>
+            <tr><td>分母次数偏高，又带根式</td><td>4.7 倒代换</td><td><span class="m">x=\frac{1}{t}</span></td></tr>
+            <tr><td>以上全部失效</td><td>4.12 万能代换</td><td>有理函数积分</td></tr>
           </tbody>
         </table>
       </article>
 
       <article class="card card--wide">
-        <div class="card__h"><span class="card__no">D</span><h3>易错四条</h3></div>
+        <div class="card__h"><span class="card__no">D</span><h3>易错六条</h3></div>
         <div class="rows">
           <div class="row"><b>1</b><span class="m">\int\sin5x\,\mathrm{d}x=-\frac{\cos5x}{5}+C</span><span class="row__note">别漏负号</span></div>
           <div class="row"><b>2</b><span class="m">\int\cos2\omega t\,\mathrm{d}t=\frac{\sin2\omega t}{2\omega}+C</span><span class="row__note">线性内层取倒数</span></div>
           <div class="row"><b>3</b><span class="m">\text{积化和差只有}\ \sin\sin\ \text{带减号}</span><span class="row__note">且差角在前</span></div>
           <div class="row"><b>4</b><span class="m">\cos A-\cos B\ \text{前有独立负号}</span><span class="row__note">全表唯一</span></div>
+          <div class="row"><b>5</b><span class="m">\int e^{x}\sin x\,\mathrm{d}x\ \text{移项后要除 2}</span><span class="row__note">循环型通病</span></div>
+          <div class="row"><b>6</b><span class="m">\text{假分式先除，别直接拆}</span><span class="row__note">漏掉多项式部分</span></div>
         </div>
-        <p class="hint">第 1、2 条本质是同一件事：<b>内层是 <span class="m">kx</span>，积分后要除 <span class="m">k</span></b>。乘在里面的系数一律取倒数提出来。</p>
+        <p class="hint">第 1、2 条本质是同一件事：<b>内层是 <span class="m">kx</span>，积分后要除 <span class="m">k</span></b>。乘在里面的系数一律取倒数提出来。第 5、6 条则是<b>动笔太快</b>：循环型移项前先合并同类项，有理式落笔前先看分子分母的次数。</p>
       </article>
 
     </div>
