@@ -134,7 +134,7 @@ main{padding:0 46px 140px 46px;min-width:0}
 .card::before{
   content:"";position:absolute;left:0;top:15px;bottom:15px;width:2.5px;border-radius:3px;background:var(--rule);
 }
-.card--wide{grid-column:span 2}
+.card--wide{grid-column:1/-1}
 .card__h{display:flex;align-items:baseline;gap:9px;margin-bottom:12px}
 .card__no{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.06em;padding-top:1px}
 .card__h h3{font-family:var(--serif);font-size:17.5px;margin:0;font-weight:600;letter-spacing:.01em;flex:1;line-height:1.5}
@@ -212,17 +212,16 @@ body.noresult .empty{display:block}
 .mnav a.on{background:var(--ink);border-color:var(--ink);color:#fff}
 
 /* ---------- 响应 ---------- */
-@media (max-width:1080px){
+@media screen and (max-width:1080px){
   .wrap{grid-template-columns:1fr}
   .rail{display:none}
   main{padding:0 22px 100px}
-  .card--wide{grid-column:span 1}
   .bar{position:static;background:none;padding-bottom:6px}
   .mnav{display:flex}
   html{scroll-padding-top:58px}
   .ch{scroll-margin-top:54px}
 }
-@media (max-width:760px){
+@media screen and (max-width:760px){
   body{font-size:16px;line-height:1.76}
   main{padding:0 15px 80px}
   .hero{padding:26px 0 18px}
@@ -303,10 +302,14 @@ body.noresult .empty{display:block}
   .ch__num{font-size:26px;min-width:38px}
   .ch__h2{font-size:16px}
   .grid{grid-template-columns:1fr 1fr;gap:7px}
+  .card--wide{grid-column:1/-1}
   .card{break-inside:avoid;page-break-inside:avoid;box-shadow:none;padding:9px 10px 8px 12px;border-radius:6px}
   .card__h{margin-bottom:6px}
   .card__h h3{font-size:12.5px}
   .rows{gap:4px}
+  .tbl{font-size:11.5px}
+  .tbl th{font-size:10.5px}
+  .tbl td{padding:5px 7px 5px 0}
   body.test .rows>.row>.m,body.test .eq>.m{filter:none!important}
   .hint{font-size:9.5px}
   .ch{break-before:auto}
@@ -750,7 +753,7 @@ body.noresult .empty{display:block}
         <div class="rows">
           <div class="row"><span class="m">\sqrt{ax+b}\ \to\ t=\sqrt{ax+b},\ \ x=\frac{t^{2}-b}{a}</span></div>
           <div class="row"><span class="m">\sqrt{\dfrac{ax+b}{cx+d}}\ \to\ t=\sqrt{\dfrac{ax+b}{cx+d}}</span></div>
-          <div class="row"><span class="m">x^{\frac{1}{m}},\ x^{\frac{1}{n}}\ \to\ t=x^{\frac{1}{k}},\ k=[m,n]</span></div>
+          <div class="row"><span class="m">\sqrt[m]{x},\ \sqrt[n]{x}\ \to\ t=x^{\frac{1}{k}},\ k=[m,n]</span></div>
           <div class="row"><span class="m">\text{分母次数偏高}\ \to\ x=\dfrac{1}{t}</span><span class="row__note">倒代换</span></div>
         </div>
         <p class="hint">目的只有一个：<b>把根式全变成整数次幂</b>。三角代换不是必须的 —— 被积式里明明是 <span class="m">\sqrt{2x+1}</span>，硬去配方令 <span class="m">x=\tan t</span> 只会把题做死。</p>
